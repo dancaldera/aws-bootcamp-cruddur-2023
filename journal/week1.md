@@ -1,5 +1,10 @@
 # Week 1 — App Containerization
 
+## Resume
+Very good week, and very good explanations of what is Docker composed and how to use it, In this week I learned how to use the Dockerfile and the configurations on a frontend and backend apps, and Using a docker-compose.yml file to orchestrate several services, not only the apps, we included the postgres and dynamodb databases in this configuration, the section of containers security was very interesting and very straightforward, very happy to being able to know and configure everything on my gitpod workspace (my first time using this approach) and ready to see the next weeks to see everything on production mode!
+
+![Docker Compose on my Gitpod workspace](assets/proof-of-docker-compose.png)
+
 ## Technical Tasks
 
 ### Create the Github Repository
@@ -40,7 +45,9 @@ I got the apps running via individual containers, using the Dockerfile's for the
 
 I created the docker-compose file, following the instructions of the week 1 video, to run the frontend and the backend, and the postgresql and dynamodb databases as well.
 
-![Docker Compose on my Gitpod workspace](assets/proof-of-docker-compose.png)
+### Notes
+
+Actually followed the instructions in backend and frontend to create the openapi notifications feature.
 
 ### Mount directories so we can make changes while we code
 
