@@ -301,3 +301,39 @@ def rollbar_test():
 
 
 [Rollbar Flask Example](https://github.com/rollbar/rollbar-flask-example/blob/master/hello.py)
+
+
+{
+    "Group": {
+        "GroupName": "Cruddur",
+        "GroupARN": "arn:aws:xray:us-east-1:244373602018:group/Cruddur/NJ36GT4LYUJMSQVGAWRTM5WSMKKONR2FEPGET4RB2YLDS7UM2BQQ",
+        "FilterExpression": "service(\"backend-flask\")",
+        "InsightsConfiguration": {
+            "InsightsEnabled": false,
+            "NotificationsEnabled": false
+}
+
+aws xray create-group --group-name "Cruddur" --filter-expression "service(\"backend-flask\")"
+
+
+{
+    "SamplingRuleRecord": {
+        "SamplingRule": {
+            "RuleName": "Cruddur",
+            "RuleARN": "arn:aws:xray:us-east-1:244373602018:sampling-rule/Cruddur",
+            "ResourceARN": "*",
+            "Priority": 9000,
+            "FixedRate": 0.1,
+            "ReservoirSize": 5,
+            "ServiceName": "backend-flask",
+            "ServiceType": "*",
+            "Host": "*",
+            "HTTPMethod": "*",
+            "URLPath": "*",
+            "Version": 1,
+            "Attributes": {}
+        },
+        "CreatedAt": "2023-03-02T07:46:24+00:00",
+        "ModifiedAt": "2023-03-02T07:46:24+00:00"
+    }
+}
