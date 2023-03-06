@@ -1,3 +1,7 @@
+# Week 2 - Distributed Tracing Overview
+
+I was able in this week to accomplish to install and use several distributed tracing tools. I was able to install and use X-Ray, HoneyComb, CloudWatch Logs, and Rollbar. I was able to use these tools to trace the requests and responses of my application. I was able to see the advantages, costs, difficulty to install and maybe right now I can say that I have a better understanding of how these tools work, Maybe I will use more Rollbar because their free tiers is not the biggest, but for error logging I see it very userful, and maybe the one that have the better developer experience.
+
 # Week 2 — Distributed Tracing
 
 ## X-Ray
