@@ -14,7 +14,7 @@ nav a.primary {
   display: flex;
   gap: 24px;
   align-items: center;
-  color: rgb(255,255,255,0.5);
+  color: rgb(255,255,255,0.75);
   font-size: 20px;
   text-decoration: none;
   padding: 12px 0;
@@ -24,7 +24,7 @@ nav a.primary:hover {
   color: rgb(255,255,255,1);
 }
 nav a.primary .icon {
-  fill: rgb(255,255,255,0.5);
+  fill: rgb(255,255,255,0.75);
   width: 24px;
   height: 24px;
 }

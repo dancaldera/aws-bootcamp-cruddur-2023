@@ -34,7 +34,7 @@
 }
 
 .activity_content  a.activity_identity .handle {
-  color: rgb(255,255,255,0.5);
+  color: rgb(255,255,255,0.75);
 }
 
 .activity_content .activity_times {
@@ -44,7 +44,7 @@
 }
 
 .activity_content .activity_times .created_at {
-  color: rgb(72,77,95);
+  color: rgb(108, 112, 124);
   font-size: 14px;
 }
 
@@ -64,4 +64,8 @@
   color: #fff;
   font-size: 16px;
   margin-top: 8px;
+}
+
+.ago {
+  color: rgba(255,255,255,0.8);
 }
