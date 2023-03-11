@@ -1,5 +1,8 @@
 # Week 3 — Decentralized Authentication
 
+## Overview
+I've worked with descentraliced login workflows before, but learning and aplying cognito in this kind of project was very nice, I worked using the configuration to create the user pool with the correct fields and happy to keep going on the next weeks.
+
 ## Install AWS Amplify
 
 ```sh
