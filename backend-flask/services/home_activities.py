@@ -1,11 +1,12 @@
 from datetime import datetime, timedelta, timezone
 
-from lib.db import pool, query_wrap_array
+from lib.db import Database
 
 
 class HomeActivities:
     def run(cognito_user_id=None):
-        sql = query_wrap_array("""
+        db = Database()
+        results = db.query_array_json("""
         SELECT
             activities.uuid,
             users.display_name,
@@ -21,8 +22,5 @@ class HomeActivities:
         LEFT JOIN public.users ON users.uuid = activities.user_uuid
         ORDER BY activities.created_at DESC
         """)
-        with pool.connection() as conn:
-            with conn.cursor() as cur:
-                cur.execute(sql)
-                json = cur.fetchone()
-        return json[0]
+
+        return results
