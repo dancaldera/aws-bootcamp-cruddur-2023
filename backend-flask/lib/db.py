@@ -25,6 +25,12 @@ class Database:
         return sql
 
     def query_commit(self, sql, val):
+
+        is_returning = sql.find('RETURNING') > -1
+
+        if is_returning:
+            return self.query_commit_with_returning_uuid(sql, val)
+
         try:
             conn = self.pool.getconn()
             cur = conn.cursor()
@@ -36,6 +42,20 @@ class Database:
             self.print_psycopg_err(err)
             return False
         return True
+
+    def query_commit_with_returning_uuid(self, sql, val):
+        try:
+            conn = self.pool.getconn()
+            cur = conn.cursor()
+            cur.execute(sql, val)
+            uuid = cur.fetchone()
+            conn.commit()
+            cur.close()
+            self.pool.putconn(conn)
+        except Exception as err:
+            self.print_psycopg_err(err)
+            return False
+        return uuid[0]
 
     def query_array_json(self, sql):
         try:

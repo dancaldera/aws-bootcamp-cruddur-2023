@@ -161,23 +161,20 @@ def data_create_message():
 @app.route("/api/activities/home", methods=['GET'])
 # xray_recorder.capture('activities_home')
 def data_home():
-    data = HomeActivities.run(cognito_user_id=None)
+    access_token = extract_access_token(request.headers)
+    try:
+        claims = cognito_jwt_token.verify(access_token)
+        # authenticated request
+        app.logger.debug("authenticated")
+        app.logger.debug(claims)
+        app.logger.debug(claims['username'])
+        data = HomeActivities.run(cognito_user_id=claims['username'])
+    except TokenVerifyError as e:
+        # unauthenticated request
+        app.logger.debug(e)
+        app.logger.debug("unauthenticated")
+        data = HomeActivities.run()
     return data, 200
-
-    # access_token = extract_access_token(request.headers)
-    # try:
-    #     claims = cognito_jwt_token.verify(access_token)
-    #     # authenticated request
-    #     app.logger.debug("authenticated")
-    #     app.logger.debug(claims)
-    #     app.logger.debug(claims['username'])
-    #     data = HomeActivities.run(cognito_user_id=claims['username'])
-    # except TokenVerifyError as e:
-    #     # unauthenticated request
-    #     app.logger.debug(e)
-    #     app.logger.debug("unauthenticated")
-    #     data = HomeActivities.run()
-    # return data, 200
 
 
 @app.route("/api/activities/notifications", methods=['GET'])
@@ -210,10 +207,23 @@ def data_search():
 @app.route("/api/activities", methods=['POST', 'OPTIONS'])
 @cross_origin()
 def data_activities():
-    user_handle = 'andrewbrown'
     message = request.json['message']
     ttl = request.json['ttl']
-    model = CreateActivity.run(message, user_handle, ttl)
+    access_token = extract_access_token(request.headers)
+    try:
+        claims = cognito_jwt_token.verify(access_token)
+        # authenticated request
+        app.logger.debug("authenticated")
+        app.logger.debug(claims)
+        app.logger.debug(claims['username'])
+        cognito_user_id = claims['username']
+    except TokenVerifyError as e:
+        # unauthenticated request
+        app.logger.debug(e)
+        app.logger.debug("unauthenticated")
+        return "unauthenticated", 401
+
+    model = CreateActivity.run(message, cognito_user_id, ttl)
     if model['errors'] is not None:
         return model['errors'], 422
     else:

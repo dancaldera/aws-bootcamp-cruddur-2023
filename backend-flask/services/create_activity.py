@@ -1,11 +1,10 @@
-import uuid
 from datetime import datetime, timedelta, timezone
 
 from lib.db import Database
 
 
 class CreateActivity:
-    def run(self, message, user_handle, ttl):
+    def run(message, cognito_user_id, ttl):
         model = {
             'errors': None,
             'data': None
@@ -30,9 +29,6 @@ class CreateActivity:
         else:
             model['errors'] = ['ttl_blank']
 
-        if user_handle == None or len(user_handle) < 1:
-            model['errors'] = ['user_handle_blank']
-
         if message == None or len(message) < 1:
             model['errors'] = ['message_blank']
         elif len(message) > 280:
@@ -40,23 +36,21 @@ class CreateActivity:
 
         if model['errors']:
             model['data'] = {
-                'handle':  user_handle,
+                'cognito_user_id':  cognito_user_id,
                 'message': message
             }
         else:
-            self.create_activity()
+            response = CreateActivity.create_activity(
+                cognito_user_id, message, (now + ttl_offset).isoformat())
+
             model['data'] = {
-                'uuid': uuid.uuid4(),
-                'display_name': 'Andrew Brown',
-                'handle':  user_handle,
-                'message': message,
-                'created_at': now.isoformat(),
-                'expires_at': (now + ttl_offset).isoformat()
+                'uuid': response
             }
         return model
 
-    # def create_activity(user_uuid, message, expires_at):
-    #     sql = "INSERT INTO (user_uuid, message, expires_at) VALUES (%s, %s, %s)"
-    #     val = (user_uuid, message, expires_at)
-
-    #     Database.query_commit(sql, val)
+    def create_activity(cognito_user_id, message, expires_at):
+        db = Database()
+        sql = "INSERT INTO activities (user_uuid, message, expires_at) VALUES ((SELECT uuid FROM users WHERE users.cognito_user_id = %s), %s, %s) RETURNING uuid"
+        val = (cognito_user_id, message, expires_at)
+        uuid = db.query_commit(sql, val)
+        return uuid
