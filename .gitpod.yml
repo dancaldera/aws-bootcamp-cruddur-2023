@@ -34,6 +34,7 @@ vscode:
     - ms-toolsai.vscode-jupyter-cell-tags
     - ms-toolsai.vscode-jupyter-slideshow
     - qufiwefefwoyn.inline-sql-syntax
+    - Codeium.codeium
 
 ports:
   - name: frontend
