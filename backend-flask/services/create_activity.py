@@ -43,8 +43,6 @@ class CreateActivity:
             uuid = CreateActivity.create_activity(
                 cognito_user_id, message, (now + ttl_offset).isoformat())
 
-            print('uuid123', uuid)
-
             object_json = CreateActivity.get_activity_by_uuid(uuid)
 
             model['data'] = object_json
