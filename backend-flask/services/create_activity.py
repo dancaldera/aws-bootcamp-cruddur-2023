@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta, timezone
 
-from lib.db import Database
+from lib.db import db
 
 
 class CreateActivity:
@@ -40,17 +40,26 @@ class CreateActivity:
                 'message': message
             }
         else:
-            response = CreateActivity.create_activity(
+            uuid = CreateActivity.create_activity(
                 cognito_user_id, message, (now + ttl_offset).isoformat())
 
-            model['data'] = {
-                'uuid': response
-            }
+            print('uuid123', uuid)
+
+            object_json = CreateActivity.get_activity_by_uuid(uuid)
+
+            model['data'] = object_json
         return model
 
     def create_activity(cognito_user_id, message, expires_at):
-        db = Database()
-        sql = "INSERT INTO activities (user_uuid, message, expires_at) VALUES ((SELECT uuid FROM users WHERE users.cognito_user_id = %s), %s, %s) RETURNING uuid"
-        val = (cognito_user_id, message, expires_at)
+        sql = db.template('activities', 'create')
+        val = {'cognito_user_id': cognito_user_id,
+               'message': message,
+               'expires_at': expires_at}
         uuid = db.query_commit(sql, val)
         return uuid
+
+    def get_activity_by_uuid(uuid):
+        sql = db.template('activities', 'get_by_uuid')
+        val = {'uuid': uuid}
+        activity = db.query_object_json(sql, val)
+        return activity
