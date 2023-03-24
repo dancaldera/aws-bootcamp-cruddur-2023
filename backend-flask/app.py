@@ -121,7 +121,6 @@ def rollbar_test():
 @app.route("/api/message_groups", methods=['GET'])
 def data_message_groups():
     access_token = extract_access_token(request.headers)
-    app.logger.info("access_token: %s", access_token)
     try:
         claims = cognito_jwt_token.verify(access_token)
         cognito_user_id = claims['sub']
