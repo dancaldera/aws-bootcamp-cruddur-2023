@@ -9,9 +9,9 @@ VALUES
     'MOCK'
   ),
   (
-    'Example User',
-    'hello@example.com',
-    'example',
+    'Tomas',
+    'tomas@example.com',
+    'Tomas',
     'MOCK'
   );
 INSERT INTO
