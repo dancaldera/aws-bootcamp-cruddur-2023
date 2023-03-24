@@ -10,7 +10,7 @@ VALUES
   ),
   (
     'Tomas',
-    'tomas@example.com',
+    'tomas@mis.fans',
     'Tomas',
     'MOCK'
   );
