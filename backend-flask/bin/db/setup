@@ -1,6 +1,9 @@
 #! /usr/bin/bash
 set -e # stop if it fails at any point
 
+# run from ./backend-flask/ folder
+# with source ./bin/db/setup
+
 #echo "==== db-setup"
 CYAN='\033[1;36m'
 NO_COLOR='\033[0m'

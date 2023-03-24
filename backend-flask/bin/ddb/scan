@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# run from ./backend-flask/ folder
+# with ./bin/ddb/scan
+
 import boto3
 
 attrs = {
