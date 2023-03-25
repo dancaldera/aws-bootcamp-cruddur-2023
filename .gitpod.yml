@@ -20,8 +20,7 @@ tasks:
   - name: flask
     init: |
       cd backend-flask
-      pip install -r requirements.txt 
-      source bin/db/setup
+      pip install -r requirements.txt
   - name: react-js
     command: |
       cd frontend-react-js
