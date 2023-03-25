@@ -6,6 +6,7 @@ import ConfirmationPage from './pages/ConfirmationPage'
 import HomeFeedPage from './pages/HomeFeedPage'
 import MessageGroupPage from './pages/MessageGroupPage'
 import MessageGroupsPage from './pages/MessageGroupsPage'
+import MessageGroupNewPage from './pages/MessageGroupNewPage'
 import NotificationsFeedPage from './pages/NotificationsFeedPage'
 import RecoverPage from './pages/RecoverPage'
 import SigninPage from './pages/SigninPage'
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
   {
     path: '/messages',
     element: <MessageGroupsPage />
+  },
+  {
+    path: "/messages/new/:handle",
+    element: <MessageGroupNewPage />
   },
   {
     path: '/messages/:message_group_uuid',

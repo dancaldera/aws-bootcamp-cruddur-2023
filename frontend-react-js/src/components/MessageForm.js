@@ -36,6 +36,7 @@ export default function ActivityForm(props) {
         body: JSON.stringify(json)
       })
       let data = await res.json()
+      console.log('data', data)
       if (res.status === 200) {
         if (data.message_group_uuid) {
           console.log('redirect to message group')
