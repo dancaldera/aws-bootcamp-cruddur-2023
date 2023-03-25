@@ -21,6 +21,7 @@ tasks:
     init: |
       cd backend-flask
       pip install -r requirements.txt 
+      source bin/db/setup
   - name: react-js
     command: |
       cd frontend-react-js
